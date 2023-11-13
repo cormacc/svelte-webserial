@@ -1,18 +1,16 @@
 <script lang="ts">
-  import Button from './Button.svelte';
+import Button from './Button.svelte';
 
-  import { createEventDispatcher } from 'svelte';
+// import { createEventDispatcher } from 'svelte';
+//
+// import { state, send } from '../services/webserialService.ts'
 
-  export let port: { name: string } | null = null;
+//TODO: Use webserialService.States here instead?
+export let port: { name: string } | null = null;
+export let requestPort: () => void | null = null;
+export let openPort: () => void | null = null;
+export let releasePort: () => void | null = null;
 
-  const dispatch = createEventDispatcher();
-
-  function onRequestPort(event: MouseEvent) {
-    dispatch('request-port', event);
-  }
-  function onOpenPort(event: MouseEvent) {
-    dispatch('open-port', event);
-  }
 </script>
 
 <header>
@@ -35,10 +33,10 @@
     </div>
     <div>
       {#if port}
-        <Button primary size="small" on:click={onOpenPort} label="Open {port.name}" />
-        <Button size="small" on:click={onRequestPort} label="Request port" />
+        <Button primary size="small" on:click={openPort} label="Open {port}" />
+        <Button size="small" on:click={releasePort} label="Release port" />
       {:else}
-        <Button primary size="small" on:click={onRequestPort} label="Request port" />
+        <Button primary size="small" on:click={requestPort} label="Request port" />
       {/if}
     </div>
   </nav>

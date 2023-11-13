@@ -20,6 +20,8 @@ export const HasPort: Story = {
     port: {
       name: 'COM3',
     },
+    //requestPort=null,
+    //openPort=null
   },
 };
 
